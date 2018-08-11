@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
+
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using ClrTest.Reflection;
+
 using UnitTestGenerator.Application;
 
 namespace UnitTestGenerator.UI
 {
     public partial class MainForm : Form
     {
-        
+
         MainFormOpreations mainFormOpreation = new MainFormOpreations();
 
         public MainForm()
@@ -24,27 +24,27 @@ namespace UnitTestGenerator.UI
         {
             if (ofdAssembelyLocation.ShowDialog() == DialogResult.OK)
             {
-                var classes = mainFormOpreation.LoadAssembely(ofdAssembelyLocation.FileName);
+                lbCalsses.Items.Clear();
+                var classes = mainFormOpreation.LoadAssembely(ofdAssembelyLocation.FileName, false);
                 lbCalsses.Items.AddRange(classes.ToArray());
                 lblAssembelyLocation.Text = ofdAssembelyLocation.SafeFileName;
-
             }
 
         }
 
         private void lbClasses_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //    var selectedTypeName = (string)lbCalsses.SelectedItem;
-            //    var selectedType = _currentAssemblyTypes.FirstOrDefault(type => type.Name == selectedTypeName);
-            //    lbMethods.Items.Clear();
-            //    lbMethods.Items.AddRange(selectedType.GetMethods());
-            //    _currentTypeMethods = selectedType.GetMethods().ToList();
+            lbMethods.Items.Clear();
+            var methods = mainFormOpreation.GetClassMethods(lbCalsses.SelectedItem as Type);
+            lbMethods.Items.AddRange(methods);
         }
 
         private void lbMethods_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
             dataGridView1.Rows.Clear();
-            var selectedMethodInfo = (MethodBase)lbMethods.SelectedItem;
+            var avaliableUnitTestsNames = mainFormOpreation.GetAvailableUnitTests(lbMethods.SelectedItem);
+            avaliableUnitTestsNames.ForEach(name => dataGridView1.Rows.Add(new[] { Name = name }));
             //if (selectedMethodInfo.ReturnType != typeof(void))
             //{
             //    var row = new DataGridViewRow();
@@ -57,9 +57,9 @@ namespace UnitTestGenerator.UI
             //    ex => { dataGridView1.Rows.Add(new object[] { selectedMethodInfo.Name + "_Throws_" + ex.CatchType.Name, false, false }); });
 
 
-      
-            
-            
+
+
+
 
             //panel.Width = flowLayoutPanel1.Width;
             //panel.Controls.Add(new Label { Text = selectedMethodInfo.Name , TextAlign = System.Drawing.ContentAlignment.MiddleCenter });

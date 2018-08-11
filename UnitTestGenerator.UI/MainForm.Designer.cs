@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ofdAssembelyLocation = new System.Windows.Forms.OpenFileDialog();
             this.button1 = new System.Windows.Forms.Button();
             this.lbCalsses = new System.Windows.Forms.ListBox();
@@ -41,13 +41,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cbMockAllParamters = new System.Windows.Forms.CheckBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colTestMethodName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMockParameters = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colAddInjectedCode = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,6 +60,7 @@
             // 
             // lbCalsses
             // 
+            this.lbCalsses.DisplayMember = "Name";
             this.lbCalsses.FormattingEnabled = true;
             this.lbCalsses.Location = new System.Drawing.Point(29, 118);
             this.lbCalsses.Name = "lbCalsses";
@@ -81,7 +79,7 @@
             // 
             // rtbMethodBody
             // 
-            this.rtbMethodBody.Location = new System.Drawing.Point(29, 604);
+            this.rtbMethodBody.Location = new System.Drawing.Point(29, 418);
             this.rtbMethodBody.Name = "rtbMethodBody";
             this.rtbMethodBody.Size = new System.Drawing.Size(1095, 167);
             this.rtbMethodBody.TabIndex = 4;
@@ -140,32 +138,11 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(25, 569);
+            this.label5.Location = new System.Drawing.Point(25, 395);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(163, 20);
             this.label5.TabIndex = 13;
             this.label5.Text = "Enter Code To Inject :";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.cbMockAllParamters);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.groupBox1.Location = new System.Drawing.Point(38, 394);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1086, 142);
-            this.groupBox1.TabIndex = 14;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Generation Configuration";
-            // 
-            // cbMockAllParamters
-            // 
-            this.cbMockAllParamters.AutoSize = true;
-            this.cbMockAllParamters.Location = new System.Drawing.Point(30, 39);
-            this.cbMockAllParamters.Name = "cbMockAllParamters";
-            this.cbMockAllParamters.Size = new System.Drawing.Size(173, 24);
-            this.cbMockAllParamters.TabIndex = 0;
-            this.cbMockAllParamters.Text = "Mock All Parameters";
-            this.cbMockAllParamters.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
@@ -174,14 +151,14 @@
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.ColumnHeadersHeight = 50;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -193,16 +170,15 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 90;
-            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView1.Size = new System.Drawing.Size(636, 251);
             this.dataGridView1.TabIndex = 15;
             // 
             // colTestMethodName
             // 
             this.colTestMethodName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.colTestMethodName.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colTestMethodName.DefaultCellStyle = dataGridViewCellStyle4;
             this.colTestMethodName.FillWeight = 120F;
             this.colTestMethodName.Frozen = true;
             this.colTestMethodName.HeaderText = "Test Method Name";
@@ -225,13 +201,12 @@
             this.colAddInjectedCode.Name = "colAddInjectedCode";
             this.colAddInjectedCode.Width = 139;
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1160, 750);
+            this.ClientSize = new System.Drawing.Size(1160, 742);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -242,11 +217,9 @@
             this.Controls.Add(this.lbMethods);
             this.Controls.Add(this.lbCalsses);
             this.Controls.Add(this.button1);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -266,8 +239,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox cbMockAllParamters;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTestMethodName;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colMockParameters;

@@ -29,8 +29,8 @@ namespace UnitTestGenerator.Templates
 
         public static bool Generate(List<UnitTest> unitTests)
         {
-            DefaultTemplate d = new DefaultTemplate();
-            File.WriteAllText("GeneratedFile.cs",d.TransformText());
+            //DefaultTemplate d = new DefaultTemplate();
+            //File.WriteAllText("GeneratedFile.cs",d.TransformText());
             return true;
         }
 

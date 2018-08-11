@@ -12,17 +12,19 @@ namespace UnitTestGenerator.Application
 {
     public class MainFormOpreations
     {
-        private Assembly _currentAssembly;
-        private List<Type> _currentAssemblyTypes;
-        private List<MethodInfo> _currentTypeMethods;
-        private MethodInfo _selectedMethod;
+        private Assembly _currentAssembly;  
 
-        public IEnumerable<string> LoadAssembely(string assemlebyLocation)
-        {   
+        public List<Type> LoadAssembely(string assemlebyLocation, bool f)
+        {
             _currentAssembly = Assembly.LoadFrom(assemlebyLocation);
-            _currentAssemblyTypes = _currentAssembly.GetTypes().ToList();
-            return _currentAssemblyTypes.Select(type=>type.Name);
+            return _currentAssembly.GetTypes().ToList();
         }
+
+        public MethodInfo[] GetClassMethods(Type type)
+        {
+            return type.GetMethods();
+        }
+
         private IEnumerable<UnitTest> GetUnitTests(MethodInfo methodInfo, object dataSource, string injectedCode)
         {
             var dataTable = dataSource as DataTable;
@@ -30,10 +32,16 @@ namespace UnitTestGenerator.Application
                 yield return new UnitTest { Name = row["Name"].ToString(), InjectedCode = injectedCode, MockObjects = (bool)row["MockObjects"] };
         }
 
-        public bool Generate(MethodInfo methodInfo, object dataSource, string injectedCode)
+        //public bool Generate(object methodInfo, object dataSource, string injectedCode)
+        //{
+        //    var unitTests = GetUnitTests(methodInfo as MethodInfo, dataSource, injectedCode).ToList();
+        //    return new GenerateTestClass().Generate(unitTests);
+        //}
+
+        public List<string> GetAvailableUnitTests(object selectedItem)
         {
-            var unitTests = GetUnitTests(methodInfo, dataSource, injectedCode).ToList();
-            return new GenerateTestClass().Generate(unitTests);
+            var processor = new MethodProcessor();
+            return processor.ProcessMethod(selectedItem as MethodInfo);
         }
     }
 }

@@ -40,12 +40,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GenerateTestClass.cs" />
+    <Compile Include="MethodProcessor.cs" />
+    <Compile Include="MethodProcessorSteps\Abstraction\Step.cs" />
+    <Compile Include="MethodProcessorSteps\Implementation\HandleExceptionsBlocks.cs" />
+    <Compile Include="MethodProcessorSteps\Implementation\HandleParameters.cs" />
+    <Compile Include="MethodProcessorSteps\Implementation\HandleReturnType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\UnitTestGenerator.Domains\UnitTestGenerator.Domains.csproj">
+      <Project>{0e3682b6-2237-4d50-a8ee-e8187e168bfc}</Project>
+      <Name>UnitTestGenerator.Domains</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UnitTestGenerator.Templates\UnitTestGenerator.Templates.csproj">
-      <Project>{98B80CB1-B206-48E1-9DCE-BD4C4DB7A555}</Project>
+      <Project>{98b80cb1-b206-48e1-9dce-bd4c4db7a555}</Project>
       <Name>UnitTestGenerator.Templates</Name>
     </ProjectReference>
   </ItemGroup>
