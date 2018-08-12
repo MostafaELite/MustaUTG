@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-
 using UnitTestGenerator.Application;
+using UnitTestGenerator.Domains;
 
 namespace UnitTestGenerator.UI
 {
@@ -20,7 +19,7 @@ namespace UnitTestGenerator.UI
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnLoadAssembly_Click(object sender, EventArgs e)
         {
             if (ofdAssembelyLocation.ShowDialog() == DialogResult.OK)
             {
@@ -34,17 +33,20 @@ namespace UnitTestGenerator.UI
 
         private void lbClasses_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lbMethods.Items.Clear();
+            lvMethods.Items.Clear();
             var methods = mainFormOpreation.GetClassMethods(lbCalsses.SelectedItem as Type);
-            lbMethods.Items.AddRange(methods);
+
+            lvMethods.Items.AddRange(methods.ToArray());
         }
 
-        private void lbMethods_SelectedIndexChanged(object sender, EventArgs e)
+        private void clbMethods_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            dataGridView1.Rows.Clear();
-            var avaliableUnitTestsNames = mainFormOpreation.GetAvailableUnitTests(lbMethods.SelectedItem);
-            avaliableUnitTestsNames.ForEach(name => dataGridView1.Rows.Add(new[] { Name = name }));
+            var unitTests = mainFormOpreation.GetUnitTestsPanels(lvMethods.SelectedItems).ToArray();
+            flowLayoutPanel1.Controls.AddRange(mainFormOpreation.GetUnitTestsPanels(lvMethods.SelectedItems).ToArray());
+
+            //dataGridView1.Rows.Clear();
+            //var avaliableUnitTestsNames = mainFormOpreation.GetAvailableUnitTests(clbMethods.SelectedItem);
+            //avaliableUnitTestsNames.ForEach(name => dataGridView1.Rows.Add(new[] { Name = name }));
             //if (selectedMethodInfo.ReturnType != typeof(void))
             //{
             //    var row = new DataGridViewRow();
@@ -83,15 +85,22 @@ namespace UnitTestGenerator.UI
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
-            string injectedCode;
-            string mockedObjects = "";
-            //if (cbMockAllParamters.Checked)
-            //{
-            //    var parameters = _selectedMethod.GetParameters();
-            //    foreach (var param in parameters)
-            //        if (IsComplex(param.ParameterType))
-            //            mockedObjects += $"var mocked{param.Name}= new Mock<{param.ParameterType.Name}>();" + Environment.NewLine;
-            //}
+            var selectedUnitTests = new List<UnitTest>();
+            
+            foreach (TableLayoutPanel tablePanel in flowLayoutPanel1.Controls)
+                foreach (Control control in tablePanel.Controls)
+                    if (control is CheckBox && ((CheckBox)control).CheckState == CheckState.Checked && control.Name.Contains("_AddUnitTest"))
+                    {
+                        var injectCode = control.Parent.Controls.Where(c => c.Name.Contains("InjectCode")) as CheckBox;
+                        var mockParameters = control.Parent.Controls.Where(c => c.Name.Contains("MockAll")) as CheckBox;
+                        var unitTest = tablePanel.Tag as UnitTest;
+                        unitTest.InjectCode = injectCode.Checked;
+                        unitTest.InjectCode = mockParameters.Checked;
+                        selectedUnitTests.Add(unitTest);
+                    }
+
+            var testingClass = new TestingClass() { InjectedCode = "asdad", UnitTests = selectedUnitTests };
+            mainFormOpreation.Generate(testingClass);
 
             //Application.MainFormOpreations formApplication = new Application.MainFormOpreations();
             //if (formApplication.Generate())
@@ -103,7 +112,6 @@ namespace UnitTestGenerator.UI
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -124,6 +132,31 @@ namespace UnitTestGenerator.UI
         }
 
         private void lbUnitTests_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lvMethods_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void lvMethods_Click(object sender, EventArgs e)
+        {
+            //flowLayoutPanel1.Controls.Clear();
+            //var unitTests = mainFormOpreation.GetUnitTestsPanels(lvMethods.SelectedItems).ToArray();
+            //flowLayoutPanel1.Controls.AddRange(mainFormOpreation.GetUnitTestsPanels(lvMethods.SelectedItems).ToArray());
+        }
+
+        private void lvMethods_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            flowLayoutPanel1.Controls.Clear();
+            var unitTests = mainFormOpreation.GetUnitTestsPanels(lvMethods.CheckedItems).ToArray();
+            flowLayoutPanel1.Controls.AddRange(mainFormOpreation.GetUnitTestsPanels(lvMethods.CheckedItems).ToArray());
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }

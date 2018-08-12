@@ -66,6 +66,10 @@
       <Project>{2435ef89-1cd7-4933-973e-f4f46469a5ac}</Project>
       <Name>UnitTestGenerator.Application</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UnitTestGenerator.Domains\UnitTestGenerator.Domains.csproj">
+      <Project>{0E3682B6-2237-4D50-A8EE-E8187E168BFC}</Project>
+      <Name>UnitTestGenerator.Domains</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
