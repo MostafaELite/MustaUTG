@@ -11,6 +11,8 @@ namespace UnitTestGenerator.Domains
         public string ClassName { get; set; }
         public string MockedObjects { get; set; }
         public string InjectedCode { get; set; }
+        public string OutputLocation { get; set; }
+
 
         public List<UnitTest> UnitTests { get; set; }
     }

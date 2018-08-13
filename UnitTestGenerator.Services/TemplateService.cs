@@ -11,7 +11,8 @@ namespace UnitTestGenerator.Services
         public void Generate(TestingClass testingClass)
         {
             var template = new TestingClassTemplate(testingClass);
-            File.WriteAllText("TestingClass.cs",template.TransformText());
+            testingClass.OutputLocation = testingClass.OutputLocation.Contains(".") ? testingClass.OutputLocation : testingClass.OutputLocation + testingClass.ClassName + "Testing";
+            File.WriteAllText(testingClass.OutputLocation, template.TransformText());
 
         }
     }

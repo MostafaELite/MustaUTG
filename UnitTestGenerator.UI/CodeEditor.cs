@@ -34,6 +34,7 @@ namespace UnitTestGenerator.UI
         private void btnSave_Click(object sender, EventArgs e)
         {
             _form.InjectedCode = rtbCode.Text;
+            Close();
         }
     }
 }

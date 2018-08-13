@@ -48,6 +48,8 @@ namespace UnitTestGenerator.UI
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
+            if (lbCalsses.Items.Count == 0)
+                MessageBox.Show("Please Load an Assembly With At Least One Class");
             var selectedUnitTests = new List<UnitTest>();
 
             foreach (TableLayoutPanel tablePanel in flowLayoutPanel1.Controls)
@@ -62,8 +64,9 @@ namespace UnitTestGenerator.UI
                         selectedUnitTests.Add(unitTest);
                     }
 
-            var testingClass = new TestingClass() { ClassName = "TestingClass", InjectedCode = "asdad", UnitTests = selectedUnitTests };
+            var testingClass = new TestingClass() { ClassName = lbCalsses.SelectedItem.ToString() + "Testing", InjectedCode = InjectedCode, UnitTests = selectedUnitTests, OutputLocation = lblOutputLocation.Text };
             mainFormOpreation.Generate(testingClass);
+            MessageBox.Show("File Generated Succefully at " + lblOutputLocation.Text);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -128,7 +131,7 @@ namespace UnitTestGenerator.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new CodeEditor().Show();
+            new CodeEditor(this).Show();
         }
     }
 }
