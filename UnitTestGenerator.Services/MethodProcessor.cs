@@ -15,7 +15,8 @@ namespace UnitTestGenerator.Services
         {
             var handleExceptionsBlocks = new HandleExceptionsBlocks(null);
             var handleReturnType = new HandleReturnType(handleExceptionsBlocks);
-            var handleParameters = new HandleParameters(handleReturnType);
+            var handleMethodCall = new HandleMethodCall(handleReturnType);
+            var handleParameters = new HandleParameters(handleMethodCall);
 
             handleParameters.Process(method);
             var result = Step.availableUnitTests.ConvertAll(f => f);

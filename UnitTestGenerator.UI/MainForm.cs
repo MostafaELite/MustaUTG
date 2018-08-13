@@ -43,50 +43,12 @@ namespace UnitTestGenerator.UI
         {
             var unitTests = mainFormOpreation.GetUnitTestsPanels(lvMethods.SelectedItems).ToArray();
             flowLayoutPanel1.Controls.AddRange(mainFormOpreation.GetUnitTestsPanels(lvMethods.SelectedItems).ToArray());
-
-            //dataGridView1.Rows.Clear();
-            //var avaliableUnitTestsNames = mainFormOpreation.GetAvailableUnitTests(clbMethods.SelectedItem);
-            //avaliableUnitTestsNames.ForEach(name => dataGridView1.Rows.Add(new[] { Name = name }));
-            //if (selectedMethodInfo.ReturnType != typeof(void))
-            //{
-            //    var row = new DataGridViewRow();
-            //    dataGridView1.Rows.Add(new object[] { selectedMethodInfo.Name + "_Returns_Wrong_Value", false, false });
-            //    dataGridView1.Rows.Add(new object[] { selectedMethodInfo.Name + "_Returns_RightValue", false, false });
-            //}
-            //var selectedMethodBody = selectedMethodInfo.GetMethodBody();
-
-            //selectedMethodBody?.ExceptionHandlingClauses.ToList().ForEach(
-            //    ex => { dataGridView1.Rows.Add(new object[] { selectedMethodInfo.Name + "_Throws_" + ex.CatchType.Name, false, false }); });
-
-
-
-
-
-
-            //panel.Width = flowLayoutPanel1.Width;
-            //panel.Controls.Add(new Label { Text = selectedMethodInfo.Name , TextAlign = System.Drawing.ContentAlignment.MiddleCenter });
-            //panel.Controls.Add(new CheckBox { Name = selectedMethodInfo.Name , Text="Mock Parameters" , TextAlign=System.Drawing.ContentAlignment.MiddleCenter });
-            //panel.Controls.Add(new CheckBox { Name = selectedMethodInfo.Name, Text = "Add Injected Code", TextAlign = System.Drawing.ContentAlignment.MiddleCenter });
-
-
-            //flowLayoutPanel1.Controls.Clear();
-            //flowLayoutPanel1.Controls.Add(panel);
-
-
-            //var selectedMethodBody = selectedMethodInfo.GetMethodBody();
-            //var selectedMethodReturnType = _selectedMethod.ReturnParameter;
-
-
-
-            //clbCodeInjected.Items.Clear();
-            //clbCodeInjected.Items.AddRange(clbUnitTests.Items);
-
         }
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
             var selectedUnitTests = new List<UnitTest>();
-            
+
             foreach (TableLayoutPanel tablePanel in flowLayoutPanel1.Controls)
                 foreach (Control control in tablePanel.Controls)
                     if (control is CheckBox && ((CheckBox)control).CheckState == CheckState.Checked && control.Name.Contains("_AddUnitTest"))
@@ -99,19 +61,13 @@ namespace UnitTestGenerator.UI
                         selectedUnitTests.Add(unitTest);
                     }
 
-            var testingClass = new TestingClass() { InjectedCode = "asdad", UnitTests = selectedUnitTests };
+            var testingClass = new TestingClass() { ClassName = "TestingClass", InjectedCode = "asdad", UnitTests = selectedUnitTests };
             mainFormOpreation.Generate(testingClass);
-
-            //Application.MainFormOpreations formApplication = new Application.MainFormOpreations();
-            //if (formApplication.Generate())
-            //    MessageBox.Show("Generated");
-
-
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            lblOutputLocation.Text = Environment.CurrentDirectory;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -159,6 +115,19 @@ namespace UnitTestGenerator.UI
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btnChangeOutputLocation_Click(object sender, EventArgs e)
+        {
+            if (sfdOutputLocation.ShowDialog() == DialogResult.OK)
+            {
+                lblOutputLocation.Text = sfdOutputLocation.FileName;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            new CodeEditor().Show();
         }
     }
 }

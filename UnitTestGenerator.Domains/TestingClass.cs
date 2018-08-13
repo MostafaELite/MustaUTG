@@ -8,6 +8,7 @@ namespace UnitTestGenerator.Domains
 {
     public class TestingClass
     {
+        public string ClassName { get; set; }
         public string MockedObjects { get; set; }
         public string InjectedCode { get; set; }
 

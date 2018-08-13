@@ -28,6 +28,29 @@ namespace UnitTestGenerator.TestingAssemebely
             return 5;
 
         }
+        public static int StaticDummyMethod(Exception qs, int y, int v)
+        {
+            try
+            {
+                if (y > 5)
+                    Console.WriteLine("c");
+                return 2;
+            }
+            catch (NullReferenceException e) { }
+            catch (ArgumentException e) { }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            SecondDummyClass s = new SecondDummyClass();
+            s.m();
+            return 5;
+
+        }
+        public void NoReturnDummy()
+        {
+        }
 
     }
 }

@@ -1,0 +1,39 @@
+﻿<#@ template language="C#" #>
+<#@ template language="C#" #>
+
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+
+
+
+namespace Name
+{
+public class <#= _testingClass.ClassName  #> 
+{
+	<# foreach(var unitTest in _testingClass.UnitTests )
+		{ #>
+		 public void <#= unitTest.Name #> ()
+		{
+
+		// Arrange
+		<# if (unitTest.CreatedCode != null) { #>
+
+		 <#= unitTest.CreatedCode #> 		 
+
+		<# } #> 
+
+		<#= _testingClass.InjectedCode #>
+
+		//Act
+		 <#= unitTest.MethodCall #> 
+
+	    //Assert
+
+		}
+		 <#}
+	#>
+}
+}

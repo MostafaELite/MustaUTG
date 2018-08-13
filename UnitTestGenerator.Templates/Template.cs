@@ -10,21 +10,13 @@ using UnitTestGenerator.Templates;
 
 namespace UnitTestGenerator.Templates
 {
-    public class Template
+    public partial class TestingClassTemplate
     {
-        public string ClassName { get; set; }
-        public List<UnitTest> UnitTests { get; set; }
-        public static Template Get()
+        public TestingClass _testingClass { get; set; }
+
+        public TestingClassTemplate(TestingClass testingClass)
         {
-            return new Template()
-            {
-                ClassName = "MyClass",
-                UnitTests = new List<UnitTest>()
-            {
-                new UnitTest() { Name = "UnitTestName" },
-                new UnitTest() { Name = "UnitTestName2" }
-            }
-            };
+            _testingClass = testingClass;
         }
 
         public static bool Generate(List<UnitTest> unitTests)

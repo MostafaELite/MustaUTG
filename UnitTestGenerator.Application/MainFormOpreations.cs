@@ -14,6 +14,7 @@ namespace UnitTestGenerator.Application
     {
         private Assembly _currentAssembly;
         private TemplateService templateService;
+
         public MainFormOpreations()
         {
             templateService = new TemplateService();
@@ -28,19 +29,12 @@ namespace UnitTestGenerator.Application
 
         public IEnumerable<ListViewItem> GetClassMethods(Type type)
         {
-            foreach (var method in type.GetMethods())
+            foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Static |BindingFlags.Instance))
                 if (method.DeclaringType != typeof(object))
                     yield return new ListViewItem() { Text = method.ToString(), Name = method.Name, Tag = method };
 
 
         }
-
-        //private IEnumerable<UnitTest> GetUnitTests(MethodInfo methodInfo, object dataSource, string injectedCode)
-        //{
-        //    var dataTable = dataSource as DataTable;
-        //    foreach (DataRow row in dataTable.Rows)
-        //        yield return new UnitTest { Name = row["Name"].ToString(), InjectedCode = injectedCode, MockObjects = (bool)row["MockObjects"] };
-        //}
 
         private List<UnitTest> GetAvailableUnitTestsNames(object selectedItem)
         {
@@ -48,7 +42,7 @@ namespace UnitTestGenerator.Application
             var castedSeletedItems = selectedItem as CheckedListViewItemCollection;
             foreach (ListViewItem item in castedSeletedItems)
             {
-                var processor = new MethodProcessor();                
+                var processor = new MethodProcessor();
                 availableUnitTestsNames.AddRange(processor.ProcessMethod(item.Tag as MethodInfo));
             }
             return availableUnitTestsNames;
@@ -94,7 +88,7 @@ namespace UnitTestGenerator.Application
                 };
 
                 RowStyle r = new RowStyle() { };
-                var unitTestPanel = new TableLayoutPanel() { BorderStyle = BorderStyle.Fixed3D, BackColor = System.Drawing.Color.BlanchedAlmond, Width = 400,Tag= unitTest };
+                var unitTestPanel = new TableLayoutPanel() { BorderStyle = BorderStyle.Fixed3D, BackColor = System.Drawing.Color.BlanchedAlmond, Width = 400, Tag = unitTest };
                 unitTestPanel.ColumnCount = 1;
                 unitTestPanel.RowCount = 1;
 
