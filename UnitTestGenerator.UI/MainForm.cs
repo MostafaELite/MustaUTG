@@ -13,6 +13,7 @@ namespace UnitTestGenerator.UI
     {
 
         MainFormOpreations mainFormOpreation = new MainFormOpreations();
+        public string InjectedCode { get; set; }
 
         public MainForm()
         {

@@ -12,8 +12,11 @@ namespace UnitTestGenerator.UI
 {
     public partial class CodeEditor : Form
     {
-        public CodeEditor()
+        private MainForm _form;
+       
+        public CodeEditor(MainForm form)
         {
+            this._form = form;
             InitializeComponent();
         }
 
@@ -21,6 +24,16 @@ namespace UnitTestGenerator.UI
         {
             Close();
 
+        }
+
+        private void CodeEditor_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            _form.InjectedCode = rtbCode.Text;
         }
     }
 }
